@@ -60,29 +60,55 @@ class UserAgentService extends Component
         if (preg_match('/msie ([0-9\.]+)/i', $ua, $matches)) {
             // IE up to version 10
             $ret['browser'] = 'ie';
-            $ret['version'] = static::parseVersion($matches[1]);
+            $ret['version'] = $this->parseVersion($matches[1]);
         } elseif (preg_match('/trident.*rv[ :]([0-9\.]+)/i', $ua, $matches)) {
             // IE from version 11 onwards
             $ret['browser'] = 'ie';
-            $ret['version'] = static::parseVersion($matches[1]);
+            $ret['version'] = $this->parseVersion($matches[1]);
+        } elseif (preg_match('/edg\/([0-9\.]+)/i', $ua, $matches)) {
+            // Microsft Edge
+            $ret['browser'] = 'ie-edge';
+            $ret['version'] = $this->parseVersion($matches[1]);
         } elseif (preg_match('/firefox\/([0-9\.]+)/i', $ua, $matches)) {
             $ret['browser'] = 'firefox';
-            $ret['version'] = static::parseVersion($matches[1]);
+            $ret['version'] = $this->parseVersion($matches[1]);
         } elseif (preg_match('/chrome\/([0-9\.]+)/i', $ua, $matches)) {
             $ret['browser'] = 'chrome';
-            $ret['version'] = static::parseVersion($matches[1]);
+            $ret['version'] = $this->parseVersion($matches[1]);
         } elseif (preg_match('/safari\/[0-9\.]+/i', $ua)) {
-            if (preg_match('/version\/([0-9\.]+)/', $ua, $matches)) {
+            if (preg_match('/version\/([0-9\.]+)/i', $ua, $matches)) {
                 $ret['browser'] = 'safari';
-                $ret['version'] = static::parseVersion($matches[1]);
+                $ret['version'] = $this->parseVersion($matches[1]);
             }
-        } elseif (preg_match('/opera\/[0-9\.]+/', $ua)) {
-            if (preg_match('/version\/([0-9\.]+)/', $ua, $matches)) {
+        } elseif (preg_match('/opera\/[0-9\.]+/i', $ua)) {
+            if (preg_match('/version\/([0-9\.]+)/i', $ua, $matches)) {
                 $ret['browser'] = 'opera';
-                $ret['version'] = static::parseVersion($matches[1]);
+                $ret['version'] = $this->parseVersion($matches[1]);
             }
         }
 
         return $ret;
+    }
+
+    private function parseVersion($str)
+    {
+        if (!$str) {
+            return false;
+        }
+        if (is_object($str)) {
+            return $str;
+        }
+
+        $info = [];
+        $info['full'] = $str;
+        if (!$bits = explode('.', $str)) {
+            return $info;
+        }
+
+        $info['major'] = $bits[0];
+        $info['minor'] = count($bits) >= 2 ? $bits[1] : 0;
+        $info['release'] = count($bits) >= 3 ? $bits[2] : 0;
+
+        return $info;
     }
 }

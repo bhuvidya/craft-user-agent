@@ -1,5 +1,5 @@
 {
-    "name": "bhuvidya/user-agent",
+    "name": "bhuvidya/craft-user-agent",
     "description": "Support for user agent sniffing.",
     "type": "craft-plugin",
     "version": "1.0.0",
@@ -11,8 +11,8 @@
         "user agent"
     ],
     "support": {
-        "docs": "https://github.com/https://github.com/bhuvidya/craft-user-agent/user-agent/blob/master/README.md",
-        "issues": "https://github.com/https://github.com/bhuvidya/craft-user-agent/user-agent/issues"
+        "docs": "https://github.com/https://github.com/bhuvidya/craft-user-agent/blob/master/README.md",
+        "issues": "https://github.com/https://github.com/bhuvidya/craft-user-agent/issues"
     },
     "license": "MIT",
     "authors": [
@@ -36,9 +36,6 @@
         "developerUrl": "https://github.com/bhuvidya",
         "documentationUrl": "https://github.com/https://github.com/bhuvidya/craft-user-agent/user-agent/blob/master/README.md",
         "changelogUrl": "https://raw.githubusercontent.com/https://github.com/bhuvidya/craft-user-agent/user-agent/master/CHANGELOG.md",
-        "components": {
-            "userAgent": "bhuvidya\\useragent\\services\\UserAgent"
-        },
         "class": "bhuvidya\\useragent\\UserAgent"
     }
 }

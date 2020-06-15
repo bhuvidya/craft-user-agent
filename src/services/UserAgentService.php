@@ -4,7 +4,7 @@
  *
  * Support for user agent sniffing.
  *
- * @link      https://github.com/bhuvidya
+ * @link      https://github.com/bhuvidya/craft-user-agent
  * @copyright Copyright (c) 2020 bhu Boue vidya
  */
 
@@ -30,23 +30,18 @@ use craft\base\Component;
  */
 class UserAgentService extends Component
 {
-    // Public Methods
-    // =========================================================================
-
+    /**
+     * Get the User Agent string.
+     */
     public function getUA()
     {
         return $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
     }
 
     /**
-     * This function can literally be anything you want, and you can have as many service
-     * functions as you want
+     * Get browser info.
      *
-     * From any other plugin file, call it like this:
-     *
-     *     UserAgent::$plugin->userAgent->exampleService()
-     *
-     * @return mixed
+     * @return array
      */
     public function getBrowser()
     {
@@ -90,6 +85,19 @@ class UserAgentService extends Component
         return $ret;
     }
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Local helpers.
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Parse a version string.
+     *
+     * @param string $str
+     * @return array | false
+     */
     private function parseVersion($str)
     {
         if (!$str) {
